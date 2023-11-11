@@ -1,13 +1,7 @@
+import Main from "./components/main/Main";
 
-function App() {
+const App = () => {
+  return <Main />;
+};
 
-  return (
-    <>
-      <div>
-        <h1 className="text-3xl">Hey!!!</h1>
-      </div>
-    </>
-  )
-}
-
-export default App
+export default App;
