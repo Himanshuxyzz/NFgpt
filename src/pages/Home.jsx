@@ -4,6 +4,7 @@ import * as ASSETS from "../constants/constants";
 import Dialog from "../components/Dialog";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,9 +22,9 @@ const Home = () => {
       <div className="absolute h-full w-full inset-0 bg-gradient-to-top from-black via-transparent to-black bg-black bg-opacity-40" />
 
       <div className=" absolute w-full flex flex-col gap-3 justify-center items-center inset-0">
-        <h1 className="text-4xl px-6 text-center sm:text-6xl font-bold text-white">
+        <h2 className="text-4xl px-6 text-center sm:text-6xl font-bold text-white">
           Enjoy big movies, hit series and more from ₹ 149.
-        </h1>
+        </h2>
         <p className="sm:px-9 text-2xl text-white sm:text-3xl font-bold">
           Join today. Cancel anytime.
         </p>
@@ -36,12 +37,21 @@ const Home = () => {
           <Input placeholder={"Email address"} />
           <Button content={"Get started"} onClick={handleModal} />
           {isOpen && (
-            <Dialog>
+            <Dialog handler={handleModal}>
               <div className="w-[350px] flex flex-col gap-4">
-                <h2>Sign In</h2>
+                <h2 className="text-2xl">Sign In</h2>
                 <Input placeholder={"Email or phone number"} />
-                <Input placeholder={"Password"}/>
-                <Button content={"Sign In"} />
+                <Input placeholder={"Password"} />
+                <div className="mt-8">
+                  <Button content={"Sign In"} />
+                </div>
+
+                <h3 className="text-neutral-500">
+                  New to netflix?
+                  <Link to={""}>
+                    <span className="text-white ml-2">Sign up now.</span>
+                  </Link>
+                </h3>
               </div>
             </Dialog>
           )}
