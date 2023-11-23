@@ -38,13 +38,15 @@ const Home = () => {
           <Button content={"Get started"} onClick={handleModal} />
           {isOpen && (
             <Dialog handler={handleModal}>
-              <div className="w-[350px] flex flex-col gap-4">
-                <h2 className="text-2xl">Sign In</h2>
-                <Input placeholder={"Email or phone number"} />
-                <Input placeholder={"Password"} />
-                <div className="mt-8">
-                  <Button content={"Sign In"} />
-                </div>
+              <div className="w-full sm:w-[350px] flex flex-col gap-4">
+                <h2 className="font-bold text-3xl">Sign In</h2>
+                <form className="flex flex-col gap-4">
+                  <Input placeholder={"Email or phone number"} type={"text"} />
+                  <Input placeholder={"Password"} type={"password"} />
+                  <div className="mt-8">
+                    <Button content={"Sign In"} />
+                  </div>
+                </form>
 
                 <h3 className="text-neutral-500">
                   New to netflix?
