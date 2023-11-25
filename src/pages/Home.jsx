@@ -8,9 +8,14 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSignIn, setIsSignIn] = useState(true);
 
   const handleModal = () => {
     setIsOpen(!isOpen);
+  };
+
+  const toggleSignUp = () => {
+    setIsSignIn(!isSignIn);
   };
   return (
     <div className="w-full h-full  ">
@@ -34,25 +39,27 @@ const Home = () => {
         </h3>
 
         <div className=" mt-3 sm:mt-0 flex gap-3 items-center flex-col sm:flex-row">
-          <Input placeholder={"Email address"} />
+          {/* <Input placeholder={"Email address"} /> */}
           <Button content={"Get started"} onClick={handleModal} />
           {isOpen && (
             <Dialog handler={handleModal}>
               <div className="w-full sm:w-[350px] flex flex-col gap-4">
-                <h2 className="font-bold text-3xl">Sign In</h2>
+                <h2 className="font-bold text-3xl">
+                  {isSignIn ? "Sign In" : "Sign Up"}
+                </h2>
                 <form className="flex flex-col gap-4">
                   <Input placeholder={"Email or phone number"} type={"text"} />
                   <Input placeholder={"Password"} type={"password"} />
                   <div className="mt-8">
-                    <Button content={"Sign In"} />
+                    <Button content={isSignIn ? "Sign In" : "Sign Up"} />
                   </div>
                 </form>
 
                 <h3 className="text-neutral-500">
-                  New to netflix?
-                  <Link to={""}>
-                    <span className="text-white ml-2">Sign up now.</span>
-                  </Link>
+                  {isSignIn ? "New to netflix?" : "Already a member"}
+                  <span onClick={toggleSignUp} className="text-white ml-2">
+                    {isSignIn ? "Sign up now." : "Sign in."}
+                  </span>
                 </h3>
               </div>
             </Dialog>
