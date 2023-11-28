@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import * as ASSETS from "../constants/constants";
 import Dialog from "../components/Dialog";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import { checkValidData } from "../utils/validate";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignIn, setIsSignIn] = useState(true);
+
+  const email = useRef(null);
+  const password = useRef(null);
 
   const handleModal = () => {
     setIsOpen(!isOpen);
@@ -18,8 +22,10 @@ const Home = () => {
   };
 
   const handleBtnClick = () => {
-    // validate the form
-    
+    // validate the form data
+    // checkValidData();
+    console.log(email.current);
+    console.log(password.current);
   };
   return (
     <div className="w-full h-full  ">
@@ -51,14 +57,28 @@ const Home = () => {
                 <h2 className="font-bold text-3xl">
                   {isSignIn ? "Sign In" : "Sign Up"}
                 </h2>
-                <form className="flex flex-col gap-4">
+                <form
+                  onSubmit={(e) => e.preventDefault()}
+                  className="flex flex-col gap-4"
+                >
                   {!isSignIn && (
                     <Input placeholder={"Full name"} type={"text"} />
                   )}
-                  <Input placeholder={"Email or phone number"} type={"text"} />
-                  <Input placeholder={"Password"} type={"password"} />
+                  <Input
+                    placeholder={"Email or phone number"}
+                    type={"text"}
+                    ref={email}
+                  />
+                  <Input
+                    placeholder={"Password"}
+                    type={"password"}
+                    ref={password}
+                  />
                   <div className="mt-8">
-                    <Button content={isSignIn ? "Sign In" : "Sign Up"} />
+                    <Button
+                      content={isSignIn ? "Sign In" : "Sign Up"}
+                      onClick={handleBtnClick}
+                    />
                   </div>
                 </form>
 
