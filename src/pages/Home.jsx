@@ -48,6 +48,7 @@ const Home = () => {
                   {isSignIn ? "Sign In" : "Sign Up"}
                 </h2>
                 <form className="flex flex-col gap-4">
+                  {!isSignIn && <Input placeholder={"Full name"} type={"text"} />}
                   <Input placeholder={"Email or phone number"} type={"text"} />
                   <Input placeholder={"Password"} type={"password"} />
                   <div className="mt-8">
@@ -55,7 +56,7 @@ const Home = () => {
                   </div>
                 </form>
 
-                <h3 className="text-neutral-500">
+                <h3 className="text-neutral-500 cursor-pointer">
                   {isSignIn ? "New to netflix?" : "Already a member"}
                   <span onClick={toggleSignUp} className="text-white ml-2">
                     {isSignIn ? "Sign up now." : "Sign in."}
