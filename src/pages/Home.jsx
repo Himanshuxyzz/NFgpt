@@ -4,7 +4,6 @@ import * as ASSETS from "../constants/constants";
 import Dialog from "../components/Dialog";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { Link } from "react-router-dom";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +15,11 @@ const Home = () => {
 
   const toggleSignUp = () => {
     setIsSignIn(!isSignIn);
+  };
+
+  const handleBtnClick = () => {
+    // validate the form
+    
   };
   return (
     <div className="w-full h-full  ">
@@ -48,7 +52,9 @@ const Home = () => {
                   {isSignIn ? "Sign In" : "Sign Up"}
                 </h2>
                 <form className="flex flex-col gap-4">
-                  {!isSignIn && <Input placeholder={"Full name"} type={"text"} />}
+                  {!isSignIn && (
+                    <Input placeholder={"Full name"} type={"text"} />
+                  )}
                   <Input placeholder={"Email or phone number"} type={"text"} />
                   <Input placeholder={"Password"} type={"password"} />
                   <div className="mt-8">
