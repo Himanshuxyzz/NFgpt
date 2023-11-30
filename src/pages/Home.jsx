@@ -9,6 +9,7 @@ import { checkValidData } from "../utils/validate";
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignIn, setIsSignIn] = useState(true);
+  const [errMsg, setErrMsg] = useState(null);
 
   const email = useRef(null);
   const password = useRef(null);
@@ -23,9 +24,11 @@ const Home = () => {
 
   const handleBtnClick = () => {
     // validate the form data
-    // checkValidData();
-    console.log(email.current);
-    console.log(password.current);
+    // console.log(email.current.value);
+    // console.log(password.current.value);
+    const message = checkValidData(email.current.value, password.current.value);
+    // console.log(message);
+    setErrMsg(message);
   };
   return (
     <div className="w-full h-full  ">
@@ -74,6 +77,7 @@ const Home = () => {
                     type={"password"}
                     ref={password}
                   />
+                  <p className="text-xs font-semibold text-red-500">{errMsg}</p>
                   <div className="mt-8">
                     <Button
                       content={isSignIn ? "Sign In" : "Sign Up"}
