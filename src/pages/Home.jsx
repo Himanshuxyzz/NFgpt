@@ -31,9 +31,9 @@ const Home = () => {
     setErrMsg(message);
   };
   return (
-    <div className="w-full h-full  ">
+    <div className="w-full ">
       <img
-        className="h-full w-full bg-cover scale-150 sm:scale-[1.5] relative"
+        className="min-h-full w-full bg-cover scale-150 sm:scale-[1.5] relative"
         src={ASSETS.BG_URL}
         alt="NF-BG"
       />
