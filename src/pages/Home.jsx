@@ -24,8 +24,6 @@ const Home = () => {
 
   const handleBtnClick = () => {
     // validate the form data
-    // console.log(email.current.value);
-    // console.log(password.current.value);
     const message = checkValidData(email.current.value, password.current.value);
     // console.log(message);
     setErrMsg(message);
@@ -52,7 +50,6 @@ const Home = () => {
         </h3>
 
         <div className=" mt-3 sm:mt-0 flex gap-3 items-center flex-col sm:flex-row">
-          {/* <Input placeholder={"Email address"} /> */}
           <Button content={"Get started"} onClick={handleModal} />
           {isOpen && (
             <Dialog handler={handleModal}>
