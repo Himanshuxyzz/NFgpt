@@ -5,6 +5,8 @@ import Dialog from "../components/Dialog";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import { checkValidData } from "../utils/validate";
+import { auth } from "../utils/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,10 +25,34 @@ const Home = () => {
   };
 
   const handleBtnClick = () => {
+    // console.log(auth);
+
     // validate the form data
     const message = checkValidData(email.current.value, password.current.value);
     // console.log(message);
     setErrMsg(message);
+
+    // if message is present means if value is not null
+    if (message) return;
+
+    // if above condition didn't fullfiled then the below code comes into play - Sign in /Sign up logic
+
+    if (!isSignIn) {
+      // Sign up logic
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+    } else {
+      // sign in logic
+    }
   };
   return (
     <div className="w-full ">

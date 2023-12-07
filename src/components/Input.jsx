@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 
 const Input = forwardRef(({ placeholder, type, ...props }, ref) => {
-  console.log(ref);
+  // console.log(ref);
   return (
     <input
       placeholder={placeholder}
