@@ -24,7 +24,8 @@ const Home = () => {
     setIsSignIn(!isSignIn);
   };
 
-  const handleBtnClick = () => {
+  const handleBtnClick = (e) => {
+    e.preventDefault();
     // console.log(auth);
 
     // validate the form data
@@ -44,11 +45,13 @@ const Home = () => {
           // Signed up
           const user = userCredential.user;
           // ...
+          console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           // ..
+          setErrMsg(`${errorCode} - ${errorMessage}`);
         });
     } else {
       // sign in logic
@@ -104,7 +107,7 @@ const Home = () => {
                   <div className="mt-8">
                     <Button
                       content={isSignIn ? "Sign In" : "Sign Up"}
-                      onClick={handleBtnClick}
+                      onClick={(e) => handleBtnClick(e)}
                     />
                   </div>
                 </form>

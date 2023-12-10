@@ -14,7 +14,7 @@ const firebaseConfig = {
   projectId: "nf-clone-d553d",
   storageBucket: "nf-clone-d553d.appspot.com",
   messagingSenderId: "410215582040",
-  appId: "1:410215582040:web:bd12a8a5e1881d2337bd2d", 
+  appId: "1:410215582040:web:bd12a8a5e1881d2337bd2d",
   measurementId: "G-D7PKJBTH8T"
 };
 
