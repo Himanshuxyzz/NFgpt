@@ -17,6 +17,7 @@ const Home = () => {
   const password = useRef(null);
 
   const handleModal = () => {
+    setErrMsg("");
     setIsOpen(!isOpen);
   };
 
@@ -26,7 +27,7 @@ const Home = () => {
 
   const handleBtnClick = (e) => {
     e.preventDefault();
-    // console.log(auth);
+    // console.log(e);
 
     // validate the form data
     const message = checkValidData(email.current.value, password.current.value);
@@ -40,6 +41,8 @@ const Home = () => {
 
     if (!isSignIn) {
       // Sign up logic
+      // const auth = getAuth();
+
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed up
@@ -86,10 +89,7 @@ const Home = () => {
                 <h2 className="font-bold text-3xl">
                   {isSignIn ? "Sign In" : "Sign Up"}
                 </h2>
-                <form
-                  onSubmit={(e) => e.preventDefault()}
-                  className="flex flex-col gap-4"
-                >
+                <form onSubmit={() => {}} className="flex flex-col gap-4">
                   {!isSignIn && (
                     <Input placeholder={"Full name"} type={"text"} />
                   )}
@@ -107,7 +107,7 @@ const Home = () => {
                   <div className="mt-8">
                     <Button
                       content={isSignIn ? "Sign In" : "Sign Up"}
-                      onClick={(e) => handleBtnClick(e)}
+                      onClick={handleBtnClick}
                     />
                   </div>
                 </form>
