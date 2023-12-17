@@ -27,9 +27,8 @@ const Home = () => {
 
   const handleBtnClick = (e) => {
     e.preventDefault();
-    // console.log(e);
-
     // validate the form data
+    console.log(email.current.value, password.current.value);
     const message = checkValidData(email.current.value, password.current.value);
     // console.log(message);
     setErrMsg(message);
@@ -41,9 +40,11 @@ const Home = () => {
 
     if (!isSignIn) {
       // Sign up logic
-      // const auth = getAuth();
-
-      createUserWithEmailAndPassword(auth, email, password)
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
@@ -56,8 +57,6 @@ const Home = () => {
           // ..
           setErrMsg(`${errorCode} - ${errorMessage}`);
         });
-    } else {
-      // sign in logic
     }
   };
   return (
@@ -89,7 +88,7 @@ const Home = () => {
                 <h2 className="font-bold text-3xl">
                   {isSignIn ? "Sign In" : "Sign Up"}
                 </h2>
-                <form onSubmit={() => {}} className="flex flex-col gap-4">
+                <form className="flex flex-col gap-4">
                   {!isSignIn && (
                     <Input placeholder={"Full name"} type={"text"} />
                   )}
@@ -105,10 +104,11 @@ const Home = () => {
                   />
                   <p className="text-xs font-semibold text-red-500">{errMsg}</p>
                   <div className="mt-8">
-                    <Button
+                    {/* <Button
                       content={isSignIn ? "Sign In" : "Sign Up"}
                       onClick={handleBtnClick}
-                    />
+                    /> */}
+                    <button onClick={handleBtnClick}>test</button>
                   </div>
                 </form>
 
