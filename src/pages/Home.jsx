@@ -7,11 +7,13 @@ import Button from "../components/Button";
 import { checkValidData } from "../utils/validate";
 import { auth } from "../utils/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import Login from "../components/main/Login";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignIn, setIsSignIn] = useState(true);
   const [errMsg, setErrMsg] = useState(null);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const email = useRef(null);
   const password = useRef(null);
@@ -26,16 +28,23 @@ const Home = () => {
   };
 
   const handleBtnClick = (e) => {
+    setErrMsg("");
     e.preventDefault();
+
+    if (!(email.current.value || password.current.value)) {
+      // console.log("disabled");
+      setIsDisabled(!isDisabled);
+    } else {
+      setIsDisabled(!isDisabled);
+    }
     // validate the form data
-    console.log(email.current.value, password.current.value);
+    // console.log(email.current.value, password.current.value);
     const message = checkValidData(email.current.value, password.current.value);
     // console.log(message);
     setErrMsg(message);
 
     // if message is present means if value is not null
     if (message) return;
-
     // if above condition didn't fullfiled then the below code comes into play - Sign in /Sign up logic
 
     if (!isSignIn) {
@@ -49,7 +58,7 @@ const Home = () => {
           // Signed up
           const user = userCredential.user;
           // ...
-          console.log(user);
+          // console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -83,43 +92,16 @@ const Home = () => {
         <div className=" mt-3 sm:mt-0 flex gap-3 items-center flex-col sm:flex-row">
           <Button content={"Get started"} onClick={handleModal} />
           {isOpen && (
-            <Dialog handler={handleModal}>
-              <div className="w-full sm:w-[350px] flex flex-col gap-4">
-                <h2 className="font-bold text-3xl">
-                  {isSignIn ? "Sign In" : "Sign Up"}
-                </h2>
-                <form className="flex flex-col gap-4">
-                  {!isSignIn && (
-                    <Input placeholder={"Full name"} type={"text"} />
-                  )}
-                  <Input
-                    placeholder={"Email or phone number"}
-                    type={"text"}
-                    ref={email}
-                  />
-                  <Input
-                    placeholder={"Password"}
-                    type={"password"}
-                    ref={password}
-                  />
-                  <p className="text-xs font-semibold text-red-500">{errMsg}</p>
-                  <div className="mt-8">
-                    {/* <Button
-                      content={isSignIn ? "Sign In" : "Sign Up"}
-                      onClick={handleBtnClick}
-                    /> */}
-                    <button onClick={handleBtnClick}>test</button>
-                  </div>
-                </form>
-
-                <h3 className="text-neutral-500 cursor-pointer">
-                  {isSignIn ? "New to netflix?" : "Already a member"}
-                  <span onClick={toggleSignUp} className="text-white ml-2">
-                    {isSignIn ? "Sign up now." : "Sign in."}
-                  </span>
-                </h3>
-              </div>
-            </Dialog>
+            <Login
+              handleModal={handleModal}
+              handleBtnClick={handleBtnClick}
+              toggleSignUp={toggleSignUp}
+              isSignIn={isSignIn}
+              errMsg={errMsg}
+              email={email}
+              password={password}
+              isDisabled={isDisabled}
+            />
           )}
         </div>
       </div>
