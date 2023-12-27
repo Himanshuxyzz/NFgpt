@@ -11,9 +11,7 @@ const Login = ({
   errMsg,
   email,
   password,
-  isDisabled,
 }) => {
-  //   console.log(email.current.value, password.current.value);
   return (
     <Dialog handler={handleModal}>
       <div className="w-full sm:w-[350px] flex flex-col gap-4">
@@ -33,7 +31,6 @@ const Login = ({
             <Button
               content={isSignIn ? "Sign In" : "Sign Up"}
               onClick={handleBtnClick}
-              isDisabled={isDisabled}
             />
           </div>
         </form>

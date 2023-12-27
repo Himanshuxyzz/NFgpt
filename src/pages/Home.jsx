@@ -6,14 +6,16 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import { checkValidData } from "../utils/validate";
 import { auth } from "../utils/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import Login from "../components/main/Login";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignIn, setIsSignIn] = useState(true);
   const [errMsg, setErrMsg] = useState(null);
-  const [isDisabled, setIsDisabled] = useState(false);
 
   const email = useRef(null);
   const password = useRef(null);
@@ -28,15 +30,8 @@ const Home = () => {
   };
 
   const handleBtnClick = (e) => {
-    setErrMsg("");
     e.preventDefault();
 
-    if (!(email.current.value || password.current.value)) {
-      // console.log("disabled");
-      setIsDisabled(!isDisabled);
-    } else {
-      setIsDisabled(!isDisabled);
-    }
     // validate the form data
     // console.log(email.current.value, password.current.value);
     const message = checkValidData(email.current.value, password.current.value);
@@ -58,12 +53,29 @@ const Home = () => {
           // Signed up
           const user = userCredential.user;
           // ...
-          // console.log(user);
+          console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           // ..
+          setErrMsg(`${errorCode} - ${errorMessage}`);
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // ...
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
           setErrMsg(`${errorCode} - ${errorMessage}`);
         });
     }
@@ -100,7 +112,6 @@ const Home = () => {
               errMsg={errMsg}
               email={email}
               password={password}
-              isDisabled={isDisabled}
             />
           )}
         </div>
