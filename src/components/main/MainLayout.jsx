@@ -6,10 +6,12 @@ import Header from "../Header";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { useDispatch } from "react-redux";
-import { addUser } from "../../utils/userSlice";
+import { RemoveUser, addUser } from "../../utils/userSlice";
 
 const Main = () => {
   const dispatch = useDispatch();
+  // to navigate user after successfull sign in
+
   const appRouter = createBrowserRouter([
     {
       path: `${ROUTES.HOME}`,
@@ -42,9 +44,13 @@ const Main = () => {
             displayName,
           })
         );
+        // navigate("/browse"); because the navigate should be insdie the router component there are multiple ways you can solve this issue
+        // * we can either navigate from inside the router child components
       } else {
         // User is signed out
         // ...
+        dispatch(RemoveUser());
+        // navigate("/");
       }
     });
   }, []);
