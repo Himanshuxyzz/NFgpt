@@ -34,7 +34,6 @@ const Main = () => {
         // https://firebase.google.com/docs/reference/js/auth.user
         // const uid = user.uid;
         const { uid, displayName, email } = user;
-
         // ...
         // console.log(uid);
         dispatch(
@@ -57,7 +56,6 @@ const Main = () => {
 
   return (
     <>
-      <Header />
       <RouterProvider router={appRouter} />
     </>
   );
