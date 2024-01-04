@@ -1,14 +1,13 @@
 import { useRef, useState } from "react";
 
 import * as ASSETS from "../constants/constants";
-import Dialog from "../components/Dialog";
-import Input from "../components/Input";
 import Button from "../components/Button";
 import { checkValidData } from "../utils/validate";
 import { auth } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import Login from "../components/main/Login";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +19,7 @@ const Home = () => {
 
   const navigate = useNavigate();
 
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
@@ -57,6 +57,18 @@ const Home = () => {
           const user = userCredential.user;
           // ...
           console.log(user);
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: ASSETS.PROFILE_URL,
+          })
+            .then(() => {
+              console.log(user);
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+              setErrMsg(error.message);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -73,7 +85,6 @@ const Home = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          // ...
           console.log(user);
           navigate("/browse");
         })
@@ -114,6 +125,7 @@ const Home = () => {
               toggleSignUp={toggleSignUp}
               isSignIn={isSignIn}
               errMsg={errMsg}
+              name={name}
               email={email}
               password={password}
             />

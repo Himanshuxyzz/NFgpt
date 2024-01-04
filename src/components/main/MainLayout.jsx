@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Home, SignIn, Browse } from "../../pages";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
-import Header from "../Header";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { useDispatch } from "react-redux";
@@ -33,7 +32,7 @@ const Main = () => {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         // const uid = user.uid;
-        const { uid, displayName, email } = user;
+        const { uid, displayName, email, photoURL } = user;
         // ...
         // console.log(uid);
         dispatch(
@@ -41,6 +40,7 @@ const Main = () => {
             uid,
             email,
             displayName,
+            photoURL,
           })
         );
         // navigate("/browse"); because the navigate should be insdie the router component there are multiple ways you can solve this issue

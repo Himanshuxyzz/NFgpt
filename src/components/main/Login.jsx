@@ -9,6 +9,7 @@ const Login = ({
   toggleSignUp,
   isSignIn,
   errMsg,
+  name,
   email,
   password,
 }) => {
@@ -19,7 +20,9 @@ const Login = ({
           {isSignIn ? "Sign In" : "Sign Up"}
         </h2>
         <form className="flex flex-col gap-4">
-          {!isSignIn && <Input placeholder={"Full name"} type={"text"} />}
+          {!isSignIn && (
+            <Input ref={name} placeholder={"Full name"} type={"text"} />
+          )}
           <Input
             placeholder={"Email or phone number"}
             type={"text"}
