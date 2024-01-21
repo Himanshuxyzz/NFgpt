@@ -11,6 +11,8 @@ import {
 } from "firebase/auth";
 import Login from "../components/main/Login";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +20,7 @@ const Home = () => {
   const [errMsg, setErrMsg] = useState(null);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const name = useRef(null);
   const email = useRef(null);
@@ -56,13 +59,23 @@ const Home = () => {
           // Signed up
           const user = userCredential.user;
           // ...
-          console.log(user);
+          // console.log(user);
           updateProfile(user, {
             displayName: name.current.value,
             photoURL: ASSETS.PROFILE_URL,
           })
             .then(() => {
-              console.log(user);
+              // here we are adding latest user data with updated name and photo url to the store so rather than getting credentials from userCredential we are using auth.currentUser for getting the latest user data and adding to the store.
+              // const { uid, displayName, email, photoURL } = user;
+              const { uid, displayName, email, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid,
+                  email,
+                  displayName,
+                  photoURL,
+                })
+              );
             })
             .catch((error) => {
               // An error occurred

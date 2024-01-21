@@ -32,6 +32,7 @@ const Login = ({
           <p className="text-xs font-semibold text-red-500">{errMsg}</p>
           <div className="mt-8">
             <Button
+              className={"w-full"}
               content={isSignIn ? "Sign In" : "Sign Up"}
               onClick={handleBtnClick}
             />

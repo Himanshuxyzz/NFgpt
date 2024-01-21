@@ -36,17 +36,21 @@ const Header = ({ className }) => {
         alt="logo"
       />
 
-      <div className="flex items-center space-x-4">
-        <div className="flex items-center gap-2">
-          <img
-            className="w-10 h-10 rounded-full"
-            src={user?.photoURL === undefined ? null : user?.photoURL}
-            alt="profile"
-          />
-          <p className="font-bold underline underline-offset-4 decoration-2">{user?.displayName}</p>
+      {user && (
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center gap-2">
+            <img
+              className="w-10 h-10 rounded-full"
+              src={user?.photoURL}
+              alt="profile"
+            />
+            <p className="font-bold underline underline-offset-4 decoration-2">
+              {user?.displayName}
+            </p>
+          </div>
+          <Button onClick={handleSignout} content={"Sign out"} />
         </div>
-        <Button onClick={handleSignout} content={"Sign out"} />
-      </div>
+      )}
     </header>
   );
 };
