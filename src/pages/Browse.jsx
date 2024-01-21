@@ -5,7 +5,6 @@ const Browse = () => {
   return (
     <div>
       <Header className={""} />
-      Browse
     </div>
   );
 };

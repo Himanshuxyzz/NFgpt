@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* not necessary because tailwind has already some base styles which contains cross browser resets */
 * {
   margin: 0;
@@ -16,7 +15,5 @@ body {
 }
 
 body {
-  overflow-y: hidden;
-  background-color: #000;
+  @apply overflow-y-hidden bg-black text-white;
 }
-

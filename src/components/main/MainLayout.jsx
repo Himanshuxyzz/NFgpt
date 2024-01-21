@@ -40,7 +40,7 @@ const Main = () => {
             uid,
             email,
             displayName,
-            photoURL,
+            photoURL, 
           })
         );
         // navigate("/browse"); because the navigate should be insdie the router component there are multiple ways you can solve this issue
@@ -48,7 +48,7 @@ const Main = () => {
       } else {
         // User is signed out
         // ...
-        dispatch(RemoveUser());
+        dispatch(RemoveUser()); 
         // navigate("/");
       }
     });
